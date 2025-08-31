@@ -1,73 +1,70 @@
 import { ModeToggle } from "@/components/theme-toggle";
-import { GithubIcon, TwitterIcon, HexagonIcon, MoveUpRightIcon } from "lucide-react";
+import { GithubIcon, TwitterIcon, CommandIcon } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
-import Search from "./search";
 import Anchor from "./anchor";
 import { SheetLeftbar } from "./leftbar";
+import { page_routes } from "@/lib/routes-config";
 import { SheetClose } from "@/components/ui/sheet";
-import NavGetStarted from "./nav-get-started";
-import dynamic from "next/dynamic";
-import { ReactNode } from "react";
+import AlgoliaSearch from "./algolia-search";
+import BilloIcon from "./billo-icon";
 
-const VersionManager = dynamic(() => import("./version-select"), {
-  ssr: false,
-});
-
-type NavLink =
-  | {
-      title: string;
-      href: string;
-      external?: boolean;
-    }
-  | { component: ReactNode; href: null };
-
-export const NAVLINKS: NavLink[] = [
+export const NAVLINKS = [
   {
-    href: null,
-    component: <NavGetStarted />,
+    title: "Documentation",
+    href: `/docs${page_routes[0].href}`,
   },
   {
     title: "Blog",
     href: "/blog",
   },
-  // {
-  //   title: "Examples",
-  //   href: "#",
-  // },
-  // {
-  //   title: "Guides",
-  //   href: "#",
-  // },
-  // {
-  //   title: "Community",
-  //   href: "#",
-  //   external: true,
-  // },
+  {
+    title: "Examples",
+    href: "#",
+  },
+  {
+    title: "Guides",
+    href: "#",
+  },
+  {
+    title: "Community",
+    href: "https://github.com/nisabmohd/Aria-Docs/discussions",
+  },
 ];
+
+const algolia_props = {
+  appId: process.env.ALGOLIA_APP_ID!,
+  indexName: process.env.ALGOLIA_INDEX!,
+  apiKey: process.env.ALGOLIA_SEARCH_API_KEY!,
+};
 
 export function Navbar() {
   return (
-    <nav className="w-full border-b h-16 sticky top-0 z-50 lg:px-4 px-2 backdrop-filter backdrop-blur-xl bg-opacity-5">
-      <div className="sm:p-3 p-1 max-w-[1530px] mx-auto h-full flex items-center justify-between md:gap-2">
-        <div className="flex items-center gap-5">
+    <nav className="w-full border-b h-16 sticky top-0 z-50 bg-background">
+      <div className="sm:container mx-auto w-[95vw] h-full flex items-center sm:justify-between md:gap-2">
+        <div className="flex items-center sm:gap-5 gap-2.5">
           <SheetLeftbar />
-          <div className="flex items-center gap-4">
-            <div className="sm:flex hidden gap-3">
-              <Logo />
-              <VersionManager />
+          <div className="flex items-center gap-6">
+            <div className="lg:flex hidden">
+              <BilloIcon />
             </div>
-            <div className="lg:flex hidden items-center gap-5 text-sm font-medium text-muted-foreground">
+            <div className="md:flex hidden items-center gap-4 text-sm font-medium text-muted-foreground">
               <NavMenu />
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <Search />
-            <div className="flex ml-2.5 sm:ml-0">
-              <Link href="https://github.com/nisabmohd/NexDocs" className={buttonVariants({ variant: "ghost", size: "icon" })}>
+        <div className="flex items-center sm:justify-normal justify-between sm:gap-3 ml-1 sm:w-fit w-[90%]">
+          <AlgoliaSearch {...algolia_props} />
+          <div className="flex items-center justify-between sm:gap-2">
+            <div className="flex ml-4 sm:ml-0">
+              <Link
+                href="https://github.com/nisabmohd/NexDocs"
+                className={buttonVariants({
+                  variant: "ghost",
+                  size: "icon",
+                })}
+              >
                 <GithubIcon className="h-[1.1rem] w-[1.1rem]" />
               </Link>
               <Link
@@ -91,8 +88,8 @@ export function Navbar() {
 export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5">
-      <HexagonIcon className="w-7 h-7 text-muted-foreground fill-current" />
-      <h2 className="text-md font-bold">AriaDocs</h2>
+      <CommandIcon className="w-6 h-6 text-muted-foreground" strokeWidth={2} />
+      <h2 className="text-md font-bold font-code">AriaDocs</h2>
     </Link>
   );
 }
@@ -101,16 +98,19 @@ export function NavMenu({ isSheet = false }) {
   return (
     <>
       {NAVLINKS.map((item) => {
-        const Comp =
-          item.href == null ? (
-            item.component
-          ) : (
-            <Anchor key={item.title + item.href} activeClassName="text-primary font-semibold" absolute className="flex items-center gap-1" href={item.href}>
-              {item.title} {item.external && <MoveUpRightIcon className="w-3 h-3 align-super" strokeWidth={3} />}
-            </Anchor>
-          );
+        const Comp = (
+          <Anchor
+            key={item.title + item.href}
+            activeClassName="!text-primary dark:font-medium font-semibold"
+            absolute
+            className="flex items-center gap-1 sm:text-sm text-[14.5px] dark:text-stone-300/85 text-stone-800"
+            href={item.href}
+          >
+            {item.title}
+          </Anchor>
+        );
         return isSheet ? (
-          <SheetClose key={item.href} asChild>
+          <SheetClose key={item.title + item.href} asChild>
             {Comp}
           </SheetClose>
         ) : (

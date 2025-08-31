@@ -11,6 +11,7 @@ authors:
     handle: nextjsguru
     username: Next.js Guru
     handleUrl: "https://github.com/nextjsguru"
+cover: "https://img.freepik.com/premium-vector/many-monsters-various-colors-doodle-come-bless-birthday-happy_577083-85.jpg?w=826"
 ---
 
 ## Introduction: Enhancing Next.js with React Server Components
@@ -18,8 +19,6 @@ authors:
 Next.js has evolved to include powerful features like React Server Components and Server Actions, which offer a new way to handle server-side rendering and logic. These features provide a more efficient and streamlined approach to building web applications, allowing you to fetch data and render components on the server without compromising performance.
 
 In this blog post, we'll explore how to use React Server Components and Server Actions in Next.js with practical examples and code snippets.
-
-![React github](https://images.unsplash.com/photo-1566241440091-ec10de8db2e1?q=80&w=2032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 
 ## What Are React Server Components?
 
@@ -35,8 +34,7 @@ React Server Components (RSC) are a new type of component introduced by React th
 
 Here’s a basic example of a React Server Component in a Next.js application:
 
-```jsx
-// app/components/UserProfile.server.js
+```jsx:profile.server.js
 import { getUserData } from "../lib/api";
 
 export default async function UserProfile() {
@@ -67,8 +65,7 @@ Server Actions are functions that run on the server in response to user interact
 
 Here’s how you can use Server Actions in a Next.js application to handle form submissions:
 
-```jsx
-// app/actions/submitForm.js
+```jsx:app/actions/submit.js
 import { saveFormData } from "../lib/api";
 
 export async function submitForm(data) {
@@ -77,8 +74,7 @@ export async function submitForm(data) {
 }
 ```
 
-```jsx
-// app/components/ContactForm.js
+```jsx:contactForm.js
 "use client";
 
 import { submitForm } from "../actions/submitForm";

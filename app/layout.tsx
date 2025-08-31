@@ -1,20 +1,25 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/contexts/theme-provider";
 import { Navbar } from "@/components/navbar";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Space_Mono, Space_Grotesk } from "next/font/google";
+import { Footer } from "@/components/footer";
+import "@/styles/globals.css";
 import { Libre_Baskerville } from "next/font/google";
 import { Figtree } from "next/font/google";
-import { Footer } from "@/components/footer";
-import "./globals.css";
-import VersionContextWrapper from "@/components/version-context-wrapper";
 
-export const metadata: Metadata = {
-  title: "AriaDocs - Template",
-  metadataBase: new URL("https://ariadocs.vercel.app/"),
-  description:
-    "This comprehensive documentation template, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements.",
-};
+const sansFont = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+  weight: "400",
+});
+
+const monoFont = Space_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+  weight: "400",
+});
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -28,6 +33,12 @@ const figtree = Figtree({
   variable: "--font-default-sans",
 });
 
+export const metadata: Metadata = {
+  title: "Billo Docs",
+  metadataBase: new URL("https://billoinvoicing.com/"),
+  description: "Billo Docs is a comprehensive documentation for Billo, a cloud-based invoicing solution.",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,13 +46,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${figtree.variable} ${libreBaskerville.variable} font-regular`} suppressHydrationWarning>
+      <head>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+      </head>
+      <body className={` ${libreBaskerville.variable} ${figtree.variable} font-regular antialiased tracking-wide`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <VersionContextWrapper>
-            <Navbar />
-            <main className="sm:container mx-auto w-[88vw] h-auto">{children}</main>
-            <Footer />
-          </VersionContextWrapper>
+          <Navbar />
+          <main className="sm:container mx-auto w-[90vw] h-auto scroll-smooth">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

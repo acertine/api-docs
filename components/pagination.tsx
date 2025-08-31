@@ -1,35 +1,46 @@
-"use client";
-
+import { getPreviousNext } from "@/lib/markdown";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
-import { getPreviousNext } from "@/lib/routes-config";
-import { useVersion } from "./context/version";
+import { buttonVariants } from "./ui/button";
 
 export default function Pagination({ pathname }: { pathname: string }) {
-  const { currentVersion } = useVersion();
-  const res = getPreviousNext(pathname, currentVersion);
+  const res = getPreviousNext(pathname);
 
   return (
-    <div className="flex items-center justify-between sm:py-7 py-5">
+    <div className="grid grid-cols-2 flex-grow sm:py-10 sm:py-7 py-4 pt-5 gap-5">
       <div>
         {res.prev && (
           <Link
-            className="flex items-center gap-2 no-underline text-sm px-1"
-            href={`/docs/${currentVersion}${res.prev.href}`}
+            className={buttonVariants({
+              variant: "outline",
+              className:
+                "no-underline w-full flex flex-col sm:pl-7 pl-3 sm:py-10 py-8 !items-start text-xs sm:text-sm",
+            })}
+            href={`/docs${res.prev.href}`}
           >
-            <ChevronLeftIcon className="w-[1.1rem] h-[1.1rem]" />
-            <p>{res.prev.title}</p>
+            <span className="flex items-center text-muted-foreground text-xs">
+              <ChevronLeftIcon className="w-[1rem] h-[1rem] mr-1" />
+              Previous
+            </span>
+            <span className="mt-1 ml-1">{res.prev.title}</span>
           </Link>
         )}
       </div>
       <div>
         {res.next && (
           <Link
-            className="flex items-center gap-2 no-underline text-sm px-1"
-            href={`/docs/${currentVersion}${res.next.href}`}
+            className={buttonVariants({
+              variant: "outline",
+              className:
+                "no-underline w-full flex flex-col sm:pr-7 pr-3 sm:py-10 py-8 !items-end text-xs sm:text-sm",
+            })}
+            href={`/docs${res.next.href}`}
           >
-            <p>{res.next.title}</p>
-            <ChevronRightIcon className="w-[1.1rem] h-[1.1rem]" />
+            <span className="flex items-center text-muted-foreground text-xs">
+              Next
+              <ChevronRightIcon className="w-[1rem] h-[1rem] ml-1" />
+            </span>
+            <span className="mt-1 mr-1">{res.next.title}</span>
           </Link>
         )}
       </div>

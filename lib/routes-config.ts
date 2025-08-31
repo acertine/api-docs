@@ -3,11 +3,12 @@
 export type EachRoute = {
   title: string;
   href: string;
-  noLink?: true;
+  noLink?: true; // noLink will create a route segment (section) but cannot be navigated
   items?: EachRoute[];
+  tag?: string;
 };
 
-const v1_0_0_ROUTES: EachRoute[] = [
+export const ROUTES: EachRoute[] = [
   {
     title: "Getting Started",
     href: "/getting-started",
@@ -17,34 +18,32 @@ const v1_0_0_ROUTES: EachRoute[] = [
       {
         title: "Installation",
         href: "/installation",
-        items: [
-          { title: "Laravel", href: "/laravel" },
-          { title: "React", href: "/react" },
-          { title: "Gatsby", href: "/gatsby" },
-        ],
       },
       { title: "Quick Start Guide", href: "/quick-start-guide" },
-      { title: "Changelog", href: "/changelog" },
-    ],
-  },
-  {
-    title: "React Hooks",
-    href: "/react-hooks",
-    noLink: true,
-    items: [
-      { title: "useFetch", href: "/use-fetch" },
-      { title: "useAuth", href: "/use-auth" },
-      { title: "useProduct", href: "/use-product" },
-      { title: "useOrder", href: "/use-order" },
-      { title: "useCart", href: "/use-cart" },
-      { title: "usePayment", href: "/use-payment" },
-      { title: "useShipping", href: "/use-shipping" },
-      { title: "useNotification", href: "/use-notification" },
-      { title: "useReview", href: "/use-review" },
-      { title: "useInventory", href: "/use-inventory" },
-      { title: "useUser", href: "/use-user" },
-      { title: "useSettings", href: "/use-settings" },
-      { title: "useData", href: "/use-data" },
+      {
+        title: "Project Structure",
+        href: "/project-structure",
+      },
+      {
+        title: "Components",
+        href: "/components",
+        items: [
+          { title: "Stepper", href: "/stepper" },
+          { title: "Tabs", href: "/tabs" },
+          { title: "Note", href: "/note" },
+          { title: "Code Block", href: "/code-block" },
+          { title: "Image & Link", href: "/image-link" },
+          { title: "File System", href: "/file-system", tag: "New" },
+          { title: "Custom", href: "/custom" },
+        ],
+      },
+      { title: "Internationalization", href: "/i18n" },
+      { title: "Algolia Search", href: "/algolia-search", tag: "New" },
+      { title: "Themes", href: "/themes" },
+      {
+        title: "Customize",
+        href: "/customize",
+      },
     ],
   },
 ];
@@ -63,28 +62,4 @@ function getRecurrsiveAllLinks(node: EachRoute) {
   return ans;
 }
 
-export function getRoutesFlatten(v: Version) {
-  const routes = getRoutesForVersion(v);
-  return routes.map((it) => getRecurrsiveAllLinks(it)).flat();
-}
-
-export function getRoutesForVersion(v: Version) {
-  // Add accordingly
-  switch (v) {
-    case "1.0.0":
-      return v1_0_0_ROUTES;
-  }
-}
-
-export function getPreviousNext(path: string, v: Version) {
-  path = path.split("/").slice(1).join("/");
-  const routes = getRoutesFlatten(v);
-  const index = routes.findIndex(({ href }) => href == `/${path}`);
-  return {
-    prev: routes[index - 1],
-    next: routes[index + 1],
-  };
-}
-
-export const availableVersions = ["1.0.0"] as const;
-export type Version = (typeof availableVersions)[number];
+export const page_routes = ROUTES.map((it) => getRecurrsiveAllLinks(it)).flat();

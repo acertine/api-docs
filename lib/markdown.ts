@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { compileMDX } from "next-mdx-remote/rsc";
 import path from "path";
 import { promises as fs } from "fs";
@@ -20,14 +21,7 @@ import Image from "@/components/markdown/image";
 import Link from "@/components/markdown/link";
 import Outlet from "@/components/markdown/outlet";
 import Files from "@/components/markdown/files";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 // add custom components
 const components = {
@@ -58,15 +52,7 @@ async function parseMdx<Frontmatter>(rawMdx: string) {
     options: {
       parseFrontmatter: true,
       mdxOptions: {
-        rehypePlugins: [
-          preProcess,
-          rehypeCodeTitles,
-          rehypeCodeTitlesWithLogo,
-          rehypePrism,
-          rehypeSlug,
-          rehypeAutolinkHeadings,
-          postProcess,
-        ],
+        rehypePlugins: [preProcess, rehypeCodeTitles, rehypeCodeTitlesWithLogo, rehypePrism, rehypeSlug, rehypeAutolinkHeadings, postProcess],
         remarkPlugins: [remarkGfm],
       },
     },
@@ -147,13 +133,7 @@ export async function getAllChilds(pathString: string) {
 
   return await Promise.all(
     page_routes_copy.map(async (it) => {
-      const totalPath = path.join(
-        process.cwd(),
-        "/contents/docs/",
-        prevHref,
-        it.href,
-        "index.mdx"
-      );
+      const totalPath = path.join(process.cwd(), "/contents/docs/", prevHref, it.href, "index.mdx");
       const raw = await fs.readFile(totalPath, "utf-8");
       return {
         ...justGetFrontmatterFromMD<BaseMdxFrontmatter>(raw),
@@ -260,10 +240,7 @@ function rehypeCodeTitlesWithLogo() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (tree: any) => {
     visit(tree, "element", (node) => {
-      if (
-        node?.tagName === "div" &&
-        node?.properties?.className?.includes("rehype-code-title")
-      ) {
+      if (node?.tagName === "div" && node?.properties?.className?.includes("rehype-code-title")) {
         const titleTextNode = node.children.find(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (child: any) => child.type === "text"

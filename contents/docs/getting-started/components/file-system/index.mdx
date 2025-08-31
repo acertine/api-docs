@@ -76,11 +76,7 @@ In this example, the file system has been modified:
     },
     { type: "file", name: "next.config.js" },
     { type: "file", name: ".gitignore" },
-    { type: "folder", name: "public", indicator: "delete",
-    children: [
-           { type: "file", name: "index.html" },   
-      ], 
-    },
+    { type: "folder", name: "public", indicator: "delete", children: [{ type: "file", name: "index.html" }] },
   ]}
 />{" "}
 
@@ -99,26 +95,26 @@ In this example, the file system has been modified:
 
 ```md
 <Files
-  items={[
-    { type: "file", name: "package.json" },
-    { type: "file", name: "tsconfig.json" },
-    {
-      type: "folder",
-      name: "src",
-      children: [
-        { type: "file", name: "index.tsx" },
-        { type: "file", name: "globals.css" },
-        {
-          type: "folder",
-          name: "components",
-          children: [
-            { type: "file", name: "Navbar.tsx" },
-            { type: "file", name: "Footer.tsx" },
-          ],
-        },
-      ],
-    },
-    { type: "file", name: "next.config.js" },
-  ]}
+items={[
+{ type: "file", name: "package.json" },
+{ type: "file", name: "tsconfig.json" },
+{
+type: "folder",
+name: "src",
+children: [
+{ type: "file", name: "index.tsx" },
+{ type: "file", name: "globals.css" },
+{
+type: "folder",
+name: "components",
+children: [
+{ type: "file", name: "Navbar.tsx" },
+{ type: "file", name: "Footer.tsx" },
+],
+},
+],
+},
+{ type: "file", name: "next.config.js" },
+]}
 />
 ```

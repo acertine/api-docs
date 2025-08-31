@@ -13,7 +13,7 @@ export default function Home() {
         Billo <span className="text-primary">Docs</span>
       </h1>
       <p className="mb-8 md:text-lg text-base  max-w-[1200px] text-muted-foreground text-left sm:text-center">
-        Billo Docs is a comprehensive guide on using Billo. Whether it's using our App, or our API, we've got you covered.
+        Billo Docs is a comprehensive guide on using Billo. Whether it&apos;s using our App, or our API, we&apos;ve got you covered.
       </p>
       <div className="sm:flex sm:flex-row grid grid-cols-2 items-center sm;gap-5 gap-3 mb-8">
         <Link href={`/docs${page_routes[0].href}`} className={buttonVariants({ className: "px-6", size: "lg" })}>

@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import "@/styles/globals.css";
 import { Libre_Baskerville } from "next/font/google";
 import { Figtree } from "next/font/google";
+import Script from "next/script";
 
 const sansFont = Space_Grotesk({
   subsets: ["latin"],
@@ -47,6 +48,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <Script async strategy="afterInteractive" id="google-analytics" src="https://www.googletagmanager.com/gtag/js?id=G-P05MZVJ5H7" />
+        <Script id="google-analytics2" strategy="afterInteractive">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag("js", new Date());
+          
+          gtag("config", "G-P05MZVJ5H7");
+        `}
+        </Script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
       </head>
       <body className={` ${libreBaskerville.variable} ${figtree.variable} font-regular antialiased tracking-wide`} suppressHydrationWarning>

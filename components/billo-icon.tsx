@@ -6,24 +6,25 @@ import Image from "next/image";
 interface BilloIconProps {
   iconOnly?: boolean;
   className?: string;
+  shortName?: boolean;
 }
 
-export default function BilloIcon({ iconOnly, className }: BilloIconProps) {
+export default function BilloIcon({ iconOnly, shortName, className }: BilloIconProps) {
   if (iconOnly) {
     return (
       <Link href="/" className="flex flex-row items-center gap-2">
-        <Image src="/img/billo-square.svg" alt="Billo Icon" width={128} height={128} className={cn("aspect-square rounded-md object-cover", className)} />
+        <Image src="/img/billo-media/icon-color.svg" alt="Billo Icon" width={128} height={128} className={cn("aspect-square rounded-md object-cover", className)} />
       </Link>
     );
   }
   return (
     <Link href="/" className="flex flex-row items-center gap-2">
       <div className="text-sidebar-primary-foreground flex aspect-square items-center justify-center rounded-md">
-        <Image src="/img/billo-square.svg" alt="Billo Icon" width={32} height={32} className="aspect-square rounded-md object-cover" />
+        <Image src="/img/billo-media/icon-color.svg" alt="Billo Icon" width={32} height={32} className="aspect-square rounded-md object-cover" />
       </div>
       <div className="mt-[2px] flex space-x-2 text-left text-sm leading-tight">
         <div className="flex flex-col gap-0">
-          <h1 className="truncate text-lg font-bold">Billo</h1>
+          <h1 className="truncate text-lg font-bold">{shortName ? "Invoicing" : "Billo Invoicing"}</h1>
         </div>
       </div>
     </Link>

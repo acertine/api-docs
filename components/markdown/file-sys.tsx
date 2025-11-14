@@ -1,23 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-  FileOrFolderType,
-  FileType,
-  FolderType,
-  isFile,
-  sortFileAndFolder,
-} from "./files";
-import { FileIcon, FolderIcon, FolderOpenIcon } from "lucide-react";
+import { FileOrFolderType, FileType, FolderType, isFile, sortFileAndFolder } from "./files";
 import { cn, getIconName, hasSupportedExtension } from "@/lib/utils";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { FileEmpty02Icon, Folder01Icon, Folder02Icon } from "@hugeicons/core-free-icons";
 
-export default function FileSys({
-  items: children,
-  sorted = false,
-}: {
-  items: FileOrFolderType[];
-  sorted?: boolean;
-}) {
+export default function FileSys({ items: children, sorted = false }: { items: FileOrFolderType[]; sorted?: boolean }) {
   const items = useMemo(() => {
     if (sorted && children) return sortFileAndFolder(children);
     return children;
@@ -35,20 +24,11 @@ export default function FileSys({
 
 function File({ name, highlight, indicator }: FileType) {
   return (
-    <div
-      className={cn(
-        "flex items-center gap-1.5 w-full hover:dark:bg-neutral-900 hover:bg-neutral-100 px-3 py-1 rounded-md relative",
-        highlight && "dark:text-blue-400 text-blue-500"
-      )}
-    >
+    <div className={cn("flex items-center gap-1.5 w-full hover:dark:bg-neutral-900 hover:bg-neutral-100 px-3 py-1 rounded-md relative", highlight && "dark:text-blue-400 text-blue-500")}>
       {hasSupportedExtension(name) ? (
-        <i
-          className={`devicon-${getIconName(
-            name
-          )}-plain text-[17px] mr-[0.14rem]`}
-        ></i>
+        <i className={`devicon-${getIconName(name)}-plain text-[17px] mr-[0.14rem]`}></i>
       ) : (
-        <FileIcon className="sm:min-w-[1.2rem] sm:min-h-[1.2rem] sm:w-[1.2rem] sm:h-[1.2rem] min-w-[1rem] min-h-[1rem] w-[1rem] h-[1rem] text-current" />
+        <HugeiconsIcon icon={FileEmpty02Icon} className="sm:min-w-[1.2rem] sm:min-h-[1.2rem] sm:w-[1.2rem] sm:h-[1.2rem] min-w-[1rem] min-h-[1rem] w-[1rem] h-[1rem] text-current" />
       )}
 
       <div className="sm:text-[15px] text-[13.5px]">
@@ -57,10 +37,8 @@ function File({ name, highlight, indicator }: FileType) {
           <span
             className={cn(
               "text-[13px] ml-3 px-1.5 rounded-md py-0.5 pb-1",
-              indicator == "delete" &&
-                "dark:text-red-400 text-red-500 bg-red-400/10",
-              indicator == "add" &&
-                "dark:text-green-400 text-green-500 bg-green-400/10"
+              indicator == "delete" && "dark:text-red-400 text-red-500 bg-red-400/10",
+              indicator == "add" && "dark:text-green-400 text-green-500 bg-green-400/10"
             )}
           >
             {indicator == "delete" ? "remove" : "add"}
@@ -71,14 +49,7 @@ function File({ name, highlight, indicator }: FileType) {
   );
 }
 
-function Folder({
-  name,
-  children,
-  isOpen: defaultOpen,
-  highlight,
-  sorted = false,
-  indicator,
-}: FolderType & { sorted?: boolean }) {
+function Folder({ name, children, isOpen: defaultOpen, highlight, sorted = false, indicator }: FolderType & { sorted?: boolean }) {
   const [isOpen, setIsOpen] = useState(() => {
     return defaultOpen ?? false;
   });
@@ -91,16 +62,13 @@ function Folder({
   return (
     <div>
       <div
-        className={cn(
-          "cursor-pointer flex items-center gap-1.5 w-full hover:dark:bg-neutral-900 hover:bg-neutral-00 px-3 py-1 rounded-md",
-          highlight && "dark:text-blue-400 text-blue-500"
-        )}
+        className={cn("cursor-pointer flex items-center gap-1.5 w-full hover:dark:bg-neutral-900 hover:bg-neutral-00 px-3 py-1 rounded-md", highlight && "dark:text-blue-400 text-blue-500")}
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? (
-          <FolderOpenIcon className="sm:min-w-[1.2rem] sm:min-h-[1.2rem] sm:w-[1.2rem] sm:h-[1.2rem] min-w-[1rem] min-h-[1rem] w-[1rem] h-[1rem]" />
+          <HugeiconsIcon icon={Folder02Icon} className="sm:min-w-[1.2rem] sm:min-h-[1.2rem] sm:w-[1.2rem] sm:h-[1.2rem] min-w-[1rem] min-h-[1rem] w-[1rem] h-[1rem]" />
         ) : (
-          <FolderIcon className="sm:min-w-[1.2rem] sm:min-h-[1.2rem] sm:w-[1.2rem] sm:h-[1.2rem] min-w-[1rem] min-h-[1rem] w-[1rem] h-[1rem]" />
+          <HugeiconsIcon icon={Folder01Icon} className="sm:min-w-[1.2rem] sm:min-h-[1.2rem] sm:w-[1.2rem] sm:h-[1.2rem] min-w-[1rem] min-h-[1rem] w-[1rem] h-[1rem]" />
         )}
         <div className="sm:text-[15px] text-[13.5px]">
           {name}
@@ -108,10 +76,8 @@ function Folder({
             <span
               className={cn(
                 "text-[13px] ml-3 px-1.5 rounded-md py-0.5 pb-1",
-                indicator == "delete" &&
-                  "dark:text-red-400 text-red-500 bg-red-400/10",
-                indicator == "add" &&
-                  "dark:text-green-400 text-green-500 bg-green-400/10"
+                indicator == "delete" && "dark:text-red-400 text-red-500 bg-red-400/10",
+                indicator == "add" && "dark:text-green-400 text-green-500 bg-green-400/10"
               )}
             >
               {indicator == "delete" ? "remove" : "add"}

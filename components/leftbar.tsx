@@ -1,17 +1,13 @@
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
 import { Logo, NavMenu } from "./navbar";
 import { Button } from "./ui/button";
-import { AlignLeftIcon } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { MenuIcon } from "@hugeicons/core-free-icons";
 import { FooterButtons } from "./footer";
 import { DialogTitle } from "./ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import DocsMenu from "./docs-menu";
+import BilloIcon from "./billo-icon";
 
 export function Leftbar() {
   return (
@@ -28,14 +24,14 @@ export function SheetLeftbar() {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="md:hidden flex">
-          <AlignLeftIcon />
+          <HugeiconsIcon icon={MenuIcon} className="h-4 w-4" />
         </Button>
       </SheetTrigger>
       <SheetContent className="flex flex-col gap-4 px-0" side="left">
         <DialogTitle className="sr-only">Menu</DialogTitle>
         <SheetHeader>
           <SheetClose className="px-5" asChild>
-            <Logo />
+            <BilloIcon />
           </SheetClose>
         </SheetHeader>
         <div className="flex flex-col gap-4 overflow-y-auto">

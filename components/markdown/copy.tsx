@@ -1,8 +1,9 @@
 "use client";
 
-import { CheckIcon, CopyIcon } from "lucide-react";
-import { Button } from "../ui/button";
 import { useState } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { CopyIcon, Tick01Icon } from "@hugeicons/core-free-icons";
+import { Button } from "../ui/button";
 
 export default function Copy({ content }: { content: string }) {
   const [isCopied, setIsCopied] = useState(false);
@@ -17,17 +18,8 @@ export default function Copy({ content }: { content: string }) {
   }
 
   return (
-    <Button
-      variant="secondary"
-      className="border"
-      size="xs"
-      onClick={handleCopy}
-    >
-      {isCopied ? (
-        <CheckIcon className="w-3 h-3" />
-      ) : (
-        <CopyIcon className="w-3 h-3" />
-      )}
+    <Button variant="secondary" className="border" size="xs" onClick={handleCopy}>
+      {isCopied ? <HugeiconsIcon icon={Tick01Icon} className="w-3 h-3" /> : <HugeiconsIcon icon={CopyIcon} className="w-3 h-3" />}
     </Button>
   );
 }

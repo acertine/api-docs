@@ -1,5 +1,5 @@
 import { ModeToggle } from "@/components/theme-toggle";
-import { GithubIcon, TwitterIcon, CommandIcon } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import Anchor from "./anchor";
@@ -8,28 +8,29 @@ import { page_routes } from "@/lib/routes-config";
 import { SheetClose } from "@/components/ui/sheet";
 import AlgoliaSearch from "./algolia-search";
 import BilloIcon from "./billo-icon";
+import { GithubIcon, NewTwitterIcon, ComputerTerminal01Icon } from "@hugeicons/core-free-icons";
 
 export const NAVLINKS = [
   {
-    title: "Documentation",
-    href: `/docs${page_routes[0].href}`,
+    title: "Help Center",
+    href: `/help${page_routes[0].href}`,
   },
   {
     title: "Blog",
     href: "/blog",
   },
-  {
-    title: "Examples",
-    href: "#",
-  },
-  {
-    title: "Guides",
-    href: "#",
-  },
-  {
-    title: "Community",
-    href: "https://github.com/nisabmohd/Aria-Docs/discussions",
-  },
+  // {
+  //   title: "Examples",
+  //   href: "#",
+  // },
+  // {
+  //   title: "Guides",
+  //   href: "#",
+  // },
+  // {
+  //   title: "Community",
+  //   href: "https://github.com/nisabmohd/Aria-Docs/discussions",
+  // },
 ];
 
 const algolia_props = {
@@ -59,22 +60,24 @@ export function Navbar() {
           <div className="flex items-center justify-between sm:gap-2">
             <div className="flex ml-4 sm:ml-0">
               <Link
-                href="https://github.com/nisabmohd/NexDocs"
+                href="https://github.com/billosoftware/api-docs"
+                target="_blank"
                 className={buttonVariants({
                   variant: "ghost",
                   size: "icon",
                 })}
               >
-                <GithubIcon className="h-[1.1rem] w-[1.1rem]" />
+                <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
               </Link>
               <Link
-                href="#"
+                href="https://x.com/billoinvoicing"
+                target="_blank"
                 className={buttonVariants({
                   variant: "ghost",
                   size: "icon",
                 })}
               >
-                <TwitterIcon className="h-[1.1rem] w-[1.1rem]" />
+                <HugeiconsIcon icon={NewTwitterIcon} className="h-4 w-4" />
               </Link>
               <ModeToggle />
             </div>
@@ -88,7 +91,7 @@ export function Navbar() {
 export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5">
-      <CommandIcon className="w-6 h-6 text-muted-foreground" strokeWidth={2} />
+      <HugeiconsIcon icon={ComputerTerminal01Icon} className="h-4 w-4 text-muted-foreground" />
       <h2 className="text-md font-bold font-code">AriaDocs</h2>
     </Link>
   );

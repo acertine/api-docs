@@ -61,8 +61,16 @@ export default function RootLayout({
         `}
         </Script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+        <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="Billo Invoicing" />
+        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <meta name="theme-color" content="#009966" />
+        <link rel="canonical" href="https://billoinvoicing.com" />
       </head>
-      <body className={` ${libreBaskerville.variable} ${figtree.variable} font-regular antialiased tracking-wide`} suppressHydrationWarning>
+      <body className={` ${libreBaskerville.variable} ${figtree.variable} `} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar />
           <main className="sm:container mx-auto w-[90vw] h-auto scroll-smooth">{children}</main>

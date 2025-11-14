@@ -60,18 +60,18 @@ export default function Home() {
         The help center is a comprehensive guide on using Billo Invoicing. Whether you&apos;re a new user or an experienced one, we&apos;ve got you covered.
       </p>
       <div className="sm:flex sm:flex-row grid grid-cols-2 items-center sm;gap-5 gap-3 mb-8">
-        <Link href={`/help${page_routes[0].href}`} className={buttonVariants({ className: "px-6", size: "lg" })}>
-          Get Stared
-        </Link>
         <Link
           href="/blog"
           className={buttonVariants({
-            variant: "secondary",
+            variant: "outline",
             className: "px-6",
             size: "lg",
           })}
         >
           Read Blog
+        </Link>
+        <Link href={`/help${page_routes[0].href}`} className={buttonVariants({ variant: "default", className: "px-6", size: "lg" })}>
+          Get Started
         </Link>
       </div>
       <Script

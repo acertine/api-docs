@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { CommandIcon, FavouriteIcon, Triangle01Icon } from "@hugeicons/core-free-icons";
+import { CommandIcon, FavouriteIcon, NewTwitterIcon, Triangle01Icon } from "@hugeicons/core-free-icons";
 
 export function Footer() {
   return (
@@ -10,8 +10,8 @@ export function Footer() {
         <div className="flex items-center gap-3">
           <HugeiconsIcon icon={CommandIcon} className="sm:block hidden w-5 h-5 text-muted-foreground" />
           <p className="text-center">
-            Build by{" "}
-            <Link className="px-1 underline underline-offset-2" href="https://github.com/v0sudo">
+            Built by{" "}
+            <Link className="px-1 underline underline-offset-2" href="https://ldo.dev">
               v0sudo
             </Link>
             . The source code is available on{" "}
@@ -19,6 +19,12 @@ export function Footer() {
               GitHub
             </Link>
             .
+          </p>
+          <p className="text-center flex">
+            Follow me on{" "}
+            <Link className="px-1 underline underline-offset-2 flex items-center gap-2" href="https://x.com/v0sudo">
+              <HugeiconsIcon icon={NewTwitterIcon} className="w-4 h-4 font-extrabold" /> v0sudo
+            </Link>
           </p>
         </div>
 

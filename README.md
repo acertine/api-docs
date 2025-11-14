@@ -1,8 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Billo Invoicing Documentation
+
+Documentation and blog website for [Billo Invoicing](https://billoinvoicing.com) - a complete invoice management platform built for modern businesses and freelancers.
+
+## About
+
+This repository contains the documentation site for Billo Invoicing, featuring:
+
+- **Help Documentation**: Comprehensive guides covering all features of Billo Invoicing
+- **Blog Posts**: Updates, announcements, and feature highlights
+- **Search**: Algolia-powered search functionality
+
+## Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS with [shadcn/ui](https://ui.shadcn.com/) components
+- **Content**: MDX files for documentation and blog posts
+- **Search**: Algolia DocSearch
+- **Deployment**: Optimized for Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+### Development
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -14,23 +50,90 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Build for production:
 
-## Learn More
+```bash
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+├── app/                    # Next.js app router pages
+│   ├── blog/              # Blog post pages
+│   ├── help/              # Documentation pages
+│   └── page.tsx           # Homepage
+├── components/            # React components
+│   ├── markdown/         # MDX components
+│   └── ui/               # shadcn/ui components
+├── contents/             # Content files
+│   ├── blogs/           # Blog post MDX files
+│   └── help/            # Documentation MDX files
+├── lib/                 # Utility functions
+│   ├── markdown.ts      # MDX processing
+│   └── routes-config.ts # Documentation routes
+└── styles/              # Global styles
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content Management
 
-## Deploy on Vercel
+### Adding Blog Posts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create a new MDX file in `contents/blogs/` with the format `YYYYMMDD-slug.mdx`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```mdx
+---
+title: "Your Blog Post Title"
+description: "A brief description"
+date: DD-MM-YYYY
+authors:
+  - avatar: "https://example.com/avatar.png"
+    handle: username
+    username: Name
+    handleUrl: "https://github.com/username"
+cover: "/img/posts/image.png"
+---
+
+Your blog content here...
+```
+
+### Adding Documentation
+
+Create a new MDX file in `contents/help/[category]/[subcategory]/index.mdx`:
+
+```mdx
+---
+title: "Documentation Title"
+description: "Brief description"
+---
+
+Your documentation content...
+```
+
+Update `lib/routes-config.ts` to add the new route to the navigation.
+
+## Features
+
+- 📚 Comprehensive help documentation
+- 📝 Blog posts and announcements
+- 🔍 Algolia-powered search
+- 🌓 Dark/light theme support
+- 📱 Responsive design
+- ♿ Accessibility features (dyslexic font option)
+- 🔗 Table of contents for long articles
+- 📄 Breadcrumb navigation
+
+## License
+
+See [LICENSE](LICENSE) file for details.
+
+## Links
+
+- **Website**: [billoinvoicing.com](https://billoinvoicing.com)
+- **Help Center**: [billoinvoicing.com/help](https://billoinvoicing.com/help)
+- **Support**: support@billoinvoicing.com
